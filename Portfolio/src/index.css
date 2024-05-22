@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@layer base {
+  h1 {
+    @apply text-54 font-normal font-inconsolata;
+  }
+  h2 {
+    @apply text-34 font-normal font-inconsolata;
+  }
+  p {
+    @apply text-21 font-normal font-inconsolata;
+  }
+}
+@layer components {
+}
+@layer utilities {
+}
+
+.gradientBGPrimary {
+  background: linear-gradient(
+    0deg,
+    rgba(1, 45, 2, 1) 0%,
+    rgba(1, 212, 8, 1) 100%
+  );
+}
+.gradientBGPrimary:hover {
+  background: linear-gradient(
+    0deg,
+    rgba(78, 6, 8, 1) 0%,
+    rgba(219, 26, 33, 1) 100%
+  );
+}
