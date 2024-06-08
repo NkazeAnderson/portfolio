@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
+import { blogsAndPostT } from "../App";
 
-function BlogCard() {
+function BlogCard({ title, description, image, link }: blogsAndPostT) {
+  const aElement = useRef<null | HTMLAnchorElement>(null);
   return (
-    <div>
-      <img className="w-full h-[350px]" src="/foodApp.jpg" alt="" />
-      <h2 className="text-primary">All html tags explained</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ratione
-        similique, corrupti aut dicta quasi? Cum commodi aspernatur,
-        perferendis, at sunt exercitationem dolor amet assumenda nisi aliquam
-        totam, numquam quod.
+    <div
+      className=" hover:cursor-pointer"
+      onClick={() => {
+        aElement.current?.click();
+      }}
+    >
+      <img className="w-full h-[350px]" src={image} alt="" />
+      <h2 className="text-primary">{title}</h2>
+      <p>{description}</p>
+      <p className=" font-bold text-primary">
+        <a ref={aElement} href={link ?? "#"} target="blank">
+          Read More
+        </a>
       </p>
-      <p className=" font-bold text-primary">Read More</p>
     </div>
   );
 }

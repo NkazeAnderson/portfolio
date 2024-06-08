@@ -18,6 +18,15 @@
   p {
     @apply text-21 font-normal font-inconsolata;
   }
+  input {
+    @apply bg-black/0 outline-none inline-block w-fit focus:outline-none opacity-0;
+  }
+  textarea {
+    @apply bg-black/0 outline-none inline-block w-fit focus:outline-none;
+  }
+  label {
+    @apply font-bold;
+  }
 }
 @layer components {
 }

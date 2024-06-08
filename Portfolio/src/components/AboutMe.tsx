@@ -1,19 +1,22 @@
 import React from "react";
 import Heading from "./heading";
 import ClimbMan from "./climbMan";
+import { skills } from "../constants";
 
 function Skill({
   url,
   text,
   large,
+  level,
 }: {
   url: string;
   text: string;
   large?: boolean;
+  level: number;
 }) {
   return (
     <div
-      className={`inline-flex p-[10px] space-x-4 bg-black items-center ${
+      className={`level-${level} skill inline-flex p-[10px] opacity-0 space-x-4 bg-black items-center ${
         large ? "rounded-[30px]" : "rounded-[15px]"
       }`}
     >
@@ -33,16 +36,37 @@ function Skill({
 
 function AboutMe() {
   return (
-    <div className="px-[50px]">
+    <div id="about" className="px-[50px]">
       <Heading text="About Me" />
       <div className="flex">
-        <div className="w-1/2 flex ">
+        <div className="w-1/2 flex relative ">
           <ClimbMan />
           <div>
-            <div>
-              <Skill text="JavaScript" url="/JavaScript-logo.png" large />
+            <div className="absolute bottom-14 space-y-4">
+              {skills.map((level, index) => (
+                <div className=" flex space-x-4 space-y-4 flex-wrap">
+                  {level.map((skill) => (
+                    <>
+                      <span className={`longSkill longSkill-${index} hidden`}>
+                        <Skill
+                          text={skill.name}
+                          url={skill.img}
+                          level={index}
+                        />
+                      </span>
+                      <span className={`largeSkill largeSkill-${index} hidden`}>
+                        <Skill
+                          text={skill.name}
+                          url={skill.img}
+                          large
+                          level={index}
+                        />
+                      </span>
+                    </>
+                  ))}
+                </div>
+              ))}
             </div>
-            <Skill text="JavaScript" url="/JavaScript-logo.png" />
           </div>
         </div>
         <div className="w-1/2">

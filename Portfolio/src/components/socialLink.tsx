@@ -1,9 +1,11 @@
 import React from "react";
 
-function SocialLink({ url }: { url: string }) {
+function SocialLink({ url, link }: { url: string; link: string }) {
   return (
     <div>
-      <img className=" h-[60px] rounded-2xl" src={url} alt="" />
+      <a href={link} target="blank">
+        <img className=" h-[50px] rounded-2xl" src={url} alt="" />
+      </a>
     </div>
   );
 }
