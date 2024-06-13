@@ -91,12 +91,13 @@ function AdminPage() {
     }, 1000);
   }
   return (
-    <div className="w-[550px] mx-auto space-y-10 pb-20">
+    <div className="w-full md:w-[550px] mx-auto space-y-10 pb-20 px-2">
       {!user ? (
         <>
           {' '}
           <h2>Login</h2>
           <form
+            className=" space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
               login();

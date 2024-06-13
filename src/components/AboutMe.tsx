@@ -1,7 +1,7 @@
-import React from "react";
-import Heading from "./heading";
-import ClimbMan from "./climbMan";
-import { skills } from "../constants";
+import React from 'react';
+import Heading from './heading';
+import ClimbMan from './climbMan';
+import { skills } from '../constants';
 
 function Skill({
   url,
@@ -16,15 +16,15 @@ function Skill({
 }) {
   return (
     <div
-      className={`level-${level} skill inline-flex p-[10px] opacity-0 space-x-4 bg-black items-center ${
-        large ? "rounded-[30px]" : "rounded-[15px]"
+      className={` level-${level} skill  p-[10px] opacity-0 space-x-4 bg-black items-center ${
+        large ? 'rounded-[30px]' : 'rounded-[15px]'
       }`}
     >
       <img
         className={` ${
           large
-            ? "w-[100px] h-[100px] rounded-[30px]"
-            : "w-[50px] h-[50px] rounded-[15px]"
+            ? 'w-[100px] h-[100px] rounded-[30px]'
+            : 'w-[50px] h-[50px] rounded-[15px]'
         }`}
         src={url}
         alt="skill"
@@ -36,13 +36,13 @@ function Skill({
 
 function AboutMe() {
   return (
-    <div id="about" className="px-[50px]">
+    <div id="about" className=" px-3 md:px-[50px]">
       <Heading text="About Me" />
-      <div className="flex">
-        <div className="w-1/2 flex relative ">
+      <div className="block lg:flex">
+        <div className="w-full lg:w-1/2  relative hidden md:flex">
           <ClimbMan />
           <div>
-            <div className="absolute bottom-14 space-y-4">
+            <div className="  absolute bottom-14 space-y-4">
               {skills.map((level, index) => (
                 <div className=" flex space-x-4 space-y-4 flex-wrap">
                   {level.map((skill) => (
@@ -69,7 +69,7 @@ function AboutMe() {
             </div>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="w-full lg:w-1/2">
           <p>
             My journey as web developer started back in 2018 when i reunited
             with a friend who just completed his bachelors degree in computer

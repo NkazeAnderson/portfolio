@@ -1,10 +1,10 @@
-import React from "react";
-import SocialLink from "./components/socialLink";
+import React from 'react';
+import SocialLink from './components/socialLink';
 
 function Footer() {
   return (
     <div className=" flex w-full  bg-black/75 items-center justify-between px-[50px] mt-auto">
-      <div>
+      <div className=" hidden md:block">
         <h1 className="text-primary">Nkaze Anderson</h1>
       </div>
       <div className="flex space-x-4">

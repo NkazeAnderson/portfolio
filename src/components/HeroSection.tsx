@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
-import Button from "./button";
+import React, { useRef } from 'react';
+import Button from './button';
 
 function HeroSection() {
   const aElement = useRef<null | HTMLAnchorElement>(null);
   return (
-    <div className="w-full flex px-[50px]">
-      <div className="w-1/2 py-5  heroText">
+    <div className="w-full block  md:flex px-[50px]">
+      <div className="w-full md:w-1/2 py-5  heroText">
         <p className="text-primary font-bold">#WHOAMI</p>
         <p>I am called</p>
         <p className="text-center">Nkaze Anderson</p>
@@ -29,7 +29,7 @@ function HeroSection() {
           />
         </div>
       </div>
-      <div className="w-1/2 pr-5">
+      <div className="w-full md:w-1/2 pr-5">
         <img
           className="ml-auto my-auto heroPicture"
           src="/nkaze.png"

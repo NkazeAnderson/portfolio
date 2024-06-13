@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, NavLink as RouteLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, NavLink as RouteLink } from 'react-router-dom';
 
 function NavLink({ isActive, text }: { isActive: boolean; text: string }) {
   const [hovered, setHovered] = useState(false);
@@ -15,8 +15,8 @@ function NavLink({ isActive, text }: { isActive: boolean; text: string }) {
     >
       <p className=" font-bold">{text}</p>
       <div
-        className={`p-1 w-full ${isActive ? "bg-primary" : " "}${
-          hovered && !isActive ? "bg-primary" : " "
+        className={`p-1 w-full ${isActive ? 'bg-primary' : ' '}${
+          hovered && !isActive ? 'bg-primary' : ' '
         }`}
       ></div>
     </div>
@@ -25,12 +25,13 @@ function NavLink({ isActive, text }: { isActive: boolean; text: string }) {
 
 function NavBar() {
   return (
-    <nav className="flex items-center justify-between bg-black px-[50px]">
-      <Link to={""}>
-        <h1 className=" text-primary">NKAZE@LOCALHOST</h1>
+    <nav className="block md:flex items-center justify-between bg-black px-1 md:px-[50px]">
+      <Link to={''}>
+        <h1 className=" text-primary hidden md:block">NKAZE@LOCALHOST</h1>
+        <h2 className=" text-primary block md:hidden">NKAZE@LOCALHOST</h2>
       </Link>
       <div className="flex space-x-10">
-        <p className="text-primary">#ls</p>
+        <p className="text-primary hidden md:block">#ls</p>
         <div className="flex space-x-4">
           <RouteLink to="">
             {({ isActive }) => <NavLink isActive={isActive} text="Home" />}
