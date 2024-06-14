@@ -1,13 +1,13 @@
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { createContext, useEffect, useRef, useState } from "react";
-import NavBar from "./components/NavBar";
-import Footer from "./Footer";
-import { Outlet, useLocation } from "react-router-dom";
-import { ScrollTrigger } from "gsap/all";
-import { skills } from "./constants";
-import { databases } from "./appwrite";
-import { Query } from "appwrite";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { createContext, useEffect, useRef, useState } from 'react';
+import NavBar from './components/NavBar';
+import Footer from './Footer';
+import { Outlet, useLocation } from 'react-router-dom';
+import { ScrollTrigger } from 'gsap/all';
+import { skills } from './constants';
+import { databases } from './appwrite';
+import { Query } from 'appwrite';
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -27,44 +27,52 @@ export default function App() {
   const [projects, setProjects] = useState<blogsAndPostT[]>([]);
 
   const cursorRef = useRef(null);
-  const isTouchDevice = "ontouchstart" in window;
+  const isTouchDevice = 'ontouchstart' in window;
   const skillsTimeLine = gsap.timeline({ repeat: -1 });
   const ClimbTimeLine = gsap.timeline({ repeat: -1 });
   const skillsLevelTimeLine = gsap.timeline();
   const location = useLocation();
-  const databaseID = import.meta.env.VITE_APPWRITE_DATABASE_ID ?? "";
-  const collectionID = import.meta.env.VITE_APPWRITE_COLLECTION_ID ?? "";
+  const databaseID = import.meta.env.VITE_APPWRITE_DATABASE_ID ?? '';
+  const collectionID = import.meta.env.VITE_APPWRITE_COLLECTION_ID ?? '';
 
   useGSAP(() => {
     gsap.fromTo(
-      ".heroText",
+      '.heroText',
       { opacity: 0, y: 10 },
       { opacity: 1, y: 0, duration: 2 }
     );
     gsap.fromTo(
-      ".headings",
+      '.headings',
       { opacity: 0, y: 10 },
-      { scrollTrigger: ".headings", opacity: 1, y: 0, duration: 2 }
+      {
+        scrollTrigger: {
+          trigger: '.headings',
+          toggleActions: ' play pause resume reset',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 2,
+      }
     );
-    gsap.fromTo(".heroPicture", { x: 20 }, { x: 0, duration: 1, ease: "none" });
+    gsap.fromTo('.heroPicture', { x: 20 }, { x: 0, duration: 1, ease: 'none' });
     skillsTimeLine.fromTo(
-      "#rightLimbs",
+      '#rightLimbs',
       { opacity: 0.2 },
       { opacity: 1, duration: 0.4 }
     );
     skillsTimeLine.fromTo(
-      "#rightLimbs",
+      '#rightLimbs',
       { opacity: 1 },
       { opacity: 0.2, duration: 0.4 }
     );
 
     skillsTimeLine.fromTo(
-      "#leftLimbs",
+      '#leftLimbs',
       { opacity: 0.2 },
       { opacity: 1, duration: 0.4 }
     );
     skillsTimeLine.fromTo(
-      "#leftLimbs",
+      '#leftLimbs',
       { opacity: 1 },
       { opacity: 0.2, duration: 0.4 }
     );
@@ -72,55 +80,55 @@ export default function App() {
     skills.forEach((level, index) => {
       skillsLevelTimeLine.fromTo(
         `.longSkill-${2 - index}`,
-        { display: "none" },
-        { display: " block" }
+        { display: 'none' },
+        { display: ' block' }
       );
 
       skillsLevelTimeLine.fromTo(
         `.level-${2 - index}`,
         { opacity: 0 },
-        { opacity: 1, display: "flex", stagger: 1 }
+        { opacity: 1, display: 'flex', stagger: 1 }
       );
 
       skillsLevelTimeLine.to(`.longSkill-${2 - index}`, {
-        display: " none",
+        display: ' none',
       });
       skillsLevelTimeLine.fromTo(
         `.largeSkill-${2 - index}`,
         { y: 10 },
         {
           y: 0,
-          display: "block",
+          display: 'block',
         }
       );
       skillsLevelTimeLine.to(`.level-${2 - index}`, {
         opacity: 1,
-        display: "flex",
+        display: 'flex',
       });
     });
 
     gsap.fromTo(
-      ".skill",
+      '.skill',
       {
-        rotate: "0px",
+        rotate: '0px',
       },
       {
-        rotate: "10px",
+        rotate: '10px',
         duration: 3,
         repeat: -1,
         delay: 25,
         yoyo: true,
-        ease: "elastic.inOut",
+        ease: 'elastic.inOut',
       }
     );
 
-    ClimbTimeLine.to("#climbMan", {
+    ClimbTimeLine.to('#climbMan', {
       y: -300,
       duration: 21,
-      ease: "power2.in",
+      ease: 'power2.in',
     });
     gsap.fromTo(
-      ".folder",
+      '.folder',
       {
         y: 50,
       },
@@ -128,17 +136,17 @@ export default function App() {
         y: 0,
         duration: 1,
         stagger: 1,
-        ease: "elastic.inOut",
+        ease: 'elastic.inOut',
       }
     );
   }, [location]);
 
   useEffect(() => {
     const blogsRequest = databases.listDocuments(databaseID, collectionID, [
-      Query.equal("isBlog", true),
+      Query.equal('isBlog', true),
     ]);
     const projectsRequest = databases.listDocuments(databaseID, collectionID, [
-      Query.equal("isBlog", false),
+      Query.equal('isBlog', false),
     ]);
 
     blogsRequest.then(
@@ -162,17 +170,17 @@ export default function App() {
       return;
     }
 
-    window.addEventListener("mousemove", (e) => {
+    window.addEventListener('mousemove', (e) => {
       const { x, y } = e;
       gsap.to(cursor, {
         x: x,
         y: y,
         duration: 0.7,
-        ease: "power4",
+        ease: 'power4',
       });
     });
 
-    document.addEventListener("mouseleave", () => {
+    document.addEventListener('mouseleave', () => {
       gsap.to(cursor, {
         duration: 0.7,
         opacity: 0,

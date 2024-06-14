@@ -23,13 +23,13 @@ function Skill({
       <img
         className={` ${
           large
-            ? 'w-[100px] h-[100px] rounded-[30px]'
-            : 'w-[50px] h-[50px] rounded-[15px]'
+            ? 'w-[50px] md:w-[100px] h-[50px] md:h-[100px] rounded-lg  md:rounded-[30px]'
+            : 'w-[30px] h-[30px] rounded-[10px]'
         }`}
         src={url}
         alt="skill"
       />
-      {!large && <h2>{text}</h2>}
+      {!large && <h2 className=" text-[16px] md:text-32">{text}</h2>}
     </div>
   );
 }
@@ -39,12 +39,12 @@ function AboutMe() {
     <div id="about" className=" px-3 md:px-[50px]">
       <Heading text="About Me" />
       <div className="block lg:flex">
-        <div className="w-full lg:w-1/2  relative hidden md:flex">
+        <div className="w-full lg:w-1/2  relative flex">
           <ClimbMan />
           <div>
             <div className="  absolute bottom-14 space-y-4">
               {skills.map((level, index) => (
-                <div className=" flex space-x-4 space-y-4 flex-wrap">
+                <div className=" flex space-x-4 space-y-9 md:space-y-4 flex-wrap">
                   {level.map((skill) => (
                     <>
                       <span className={`longSkill longSkill-${index} hidden`}>
