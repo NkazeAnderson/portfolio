@@ -16,7 +16,7 @@ function Skill({
 }) {
   return (
     <div
-      className={` level-${level} skill  p-[10px] opacity-0 space-x-4 bg-black items-center ${
+      className={` level-${level} skill  p-[8px] md:p-[10px] opacity-0 space-x-4 bg-black items-center ${
         large ? 'rounded-[30px]' : 'rounded-[15px]'
       }`}
     >
@@ -42,9 +42,9 @@ function AboutMe() {
         <div className="w-full lg:w-1/2  relative flex">
           <ClimbMan />
           <div>
-            <div className="  absolute bottom-14 space-y-4">
+            <div className="absolute bottom-14 space-y-4">
               {skills.map((level, index) => (
-                <div className=" flex space-x-4 space-y-9 md:space-y-4 flex-wrap">
+                <div className=" flex space-x-2 md:space-x-4 space-y-9 md:space-y-4 flex-wrap">
                   {level.map((skill) => (
                     <>
                       <span className={`longSkill longSkill-${index} hidden`}>

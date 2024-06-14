@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from './button';
 import { auth, databases, storage } from '../appwrite';
 import { ID } from 'appwrite';
@@ -34,6 +34,7 @@ function AdminPage() {
   const [link, setLink] = useState('');
   const [isBlog, setIsBlog] = useState(false);
   const [isPosted, setIsPosted] = useState(false);
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const imageRef = useRef<null | HTMLInputElement>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,6 +47,10 @@ function AdminPage() {
   const databaseID = import.meta.env.VITE_APPWRITE_DATABASE_ID ?? '';
   const collectionID = import.meta.env.VITE_APPWRITE_COLLECTION_ID ?? '';
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   async function getUser() {
     const userRes = await auth.get();
     setUser(userRes);
@@ -54,18 +59,25 @@ function AdminPage() {
 
   async function login() {
     try {
-      await auth.createEmailPasswordSession(email, password);
+      setIsSubmiting(true);
       await getUser();
     } catch (error) {
-      console.log('====================================');
-      console.log(error);
-      console.log('====================================');
+      try {
+        await auth.createEmailPasswordSession(email, password);
+        setIsSubmiting(false);
+      } catch (error) {
+        setIsSubmiting(false);
+        console.log('====================================');
+        console.log(error);
+        console.log('====================================');
+      }
     }
   }
 
   async function createDoc() {
     let imageURL = '';
     if (imageRef.current && imageRef.current.files) {
+      setIsSubmiting(true);
       const resImage = await storage.createFile(
         bucketID,
         ID.unique(),
@@ -73,6 +85,7 @@ function AdminPage() {
       );
       imageURL = storage.getFileView(bucketID, resImage.$id).toString();
     } else {
+      setIsSubmiting(false);
       return;
     }
     await databases.createDocument(databaseID, collectionID, ID.unique(), {
@@ -86,12 +99,13 @@ function AdminPage() {
     setTitle('');
     setDescription('');
     setIsBlog(false);
+    setIsSubmiting(false);
     setTimeout(() => {
       setIsPosted(false);
     }, 1000);
   }
   return (
-    <div className="w-full md:w-[550px] mx-auto space-y-10 pb-20 px-2">
+    <div className="w-full md:w-[550px] mx-auto space-y-10 py-20 px-2">
       {!user ? (
         <>
           {' '}
@@ -133,7 +147,10 @@ function AdminPage() {
                 width: ' 100%',
               }}
             />
-            <Button text={'Login'} action={login} />
+            <Button
+              text={isSubmiting ? 'Submitting...' : 'Login'}
+              action={login}
+            />
           </form>
         </>
       ) : (
@@ -229,7 +246,10 @@ function AdminPage() {
                 />
               </div>
 
-              <Button text="Submit" action={() => {}} />
+              <Button
+                text={isSubmiting ? 'Submitting...' : 'Submit'}
+                action={() => {}}
+              />
             </form>
           )}
         </>
